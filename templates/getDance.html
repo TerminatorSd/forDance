@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  user-scalable=0" name="viewport" />
+
+    <title>getDance</title>
+    {% load staticfiles %}
+    <script src="{% static "js/vendor/jquery-1.12.0.min.js" %}"></script>
+    <script src="{% static "js/index.js" %}"></script>
+    <link rel="stylesheet" href="{%  static 'css/index.css' %}" />
+</head>
+<body>
+
+    <header>Who will dance with you tonight?</header>
+
+    <div class="container">
+        {% csrf_token %}
+
+        <label for="time" class="first">Time</label>
+        <input type="date" id="time"/>
+
+        <label for="place">Place</label>
+        <select id="place">
+            <option>A1</option>
+            <option>54</option>
+        </select>
+
+        <input type="button" value="瞧一哈" onclick="getDance()"/>
+    </div>
+
+    <div class="record">
+
+    </div>
+
+</body>
+</html>
