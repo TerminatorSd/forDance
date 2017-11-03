@@ -23,12 +23,13 @@ body {
 header {
 
     width: 100vw;
-    height: 10vw;
+    height: 15vw;
     background-color: white;
     position: fixed;
     text-align: center;
     vertical-align: middle;
     box-shadow: 1px 1px 1px 1px grey;
+    line-height: 15vw;
 }
 
 .container {
@@ -42,7 +43,7 @@ label {
 }
 
 .first {
-    margin-top: 12vw;
+    margin-top: 18vw;
 }
 
 select {
