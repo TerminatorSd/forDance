@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^getDance/', dance_views.getDance),
     url(r'^success/', dance_views.successPage),
     url(r'^record/', dance_views.recordPage),
+    url(r'^team/', dance_views.showTeam),
 
 ]

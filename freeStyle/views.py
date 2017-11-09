@@ -73,4 +73,8 @@ def successPage(request):
 
 def recordPage(request):
 
-    return render(request, "record.html")
+    return render(request, "team.html")
+
+def showTeam(request):
+
+    return render(request, "team.html")

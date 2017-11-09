@@ -92,3 +92,18 @@ table {
 .info {
     display: none;
 }
+
+a.photo {
+    display: inline-block;
+}
+
+a.photo img {
+    width: 35vw;
+    height: 35vw;
+    border-radius: 30vw;
+}
+
+a.photo p {
+
+    text-align: center;
+}

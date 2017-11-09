@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  user-scalable=0" name="viewport" />
+    {% load staticfiles %}
+    <script src="{% static "js/vendor/jquery-1.12.0.min.js" %}"></script>
+    <script src="{% static "js/index.js" %}"></script>
+    <link rel="stylesheet" href="{%  static 'css/index.css' %}" />
+
+    <title>You know nothing about power.</title>
+</head>
+<body>
+	<a class="photo">
+		<img src="{% static "img/team/siuDong.jpg" %}" >
+		<p>siuDong</p>
+	</a>
+
+    <a class="photo">
+		<img src="{% static "img/team/louWa.jpg" %}" >
+		<p>louWa</p>
+	</a>
+
+    <a class="photo">
+		<img src="{% static "img/team/JV.jpg" %}" >
+		<p>JV</p>
+	</a>
+
+    <a class="photo">
+		<img src="{% static "img/team/bigHead.jpg" %}" >
+		<p>bigHead</p>
+	</a>
+
+    <a class="photo">
+		<img src="{% static "img/team/JJ.jpg" %}" >
+		<p>JJ</p>
+	</a>
+    <a class="photo">
+		<img src="{% static "img/team/villageHead.jpg" %}" >
+		<p>villageHead</p>
+	</a>
+    <a class="photo">
+		<img src="{% static "img/team/bookMember.jpg" %}" >
+		<p>bookMember</p>
+	</a>
+    <a class="photo">
+		<img src="{% static "img/team/others.jpg" %}" >
+		<p>waiting for you</p>
+	</a>
+
+    <a href="/toDance/">go back</a>
+
+</body>
+</html>
