@@ -5,6 +5,30 @@ window.onload = function () {
 
 };
 
+function lookAt()
+{
+    var head = document.getElementsByTagName('header')[0];
+    var info = document.getElementsByClassName('info')[0];
+    var con = document.getElementsByClassName('container')[0];
+
+    head.innerHTML = 'Who will dance with you tonight?';
+    info.style.display = 'block';
+    con.style.display = 'none';
+
+}
+
+function goBack()
+{
+    var head = document.getElementsByTagName('header')[0];
+    var info = document.getElementsByClassName('info')[0];
+    var con = document.getElementsByClassName('container')[0];
+
+    head.innerHTML = 'Dance is good for your health.';
+    info.style.display = 'none';
+    con.style.display = 'block';
+
+}
+
 function submitDance() {
 
     var name = document.getElementsByTagName('select')[0].value;
@@ -27,7 +51,8 @@ function submitDance() {
 
             if(data[0] === 'ok')
             {
-               window.location.href = "/success/";
+               alert('Good boy/girl, see you later');
+               window.location.reload();
             }
 
         },
@@ -39,9 +64,10 @@ function submitDance() {
 
 function getDance() {
 
-    var place = document.getElementsByTagName('select')[0].value;
+    var place = document.getElementsByClassName('info_place')[0].value;
+    var time = document.getElementsByClassName('info_date')[0].value;
     var csrf = document.getElementsByTagName('input')[0].value;
-    var time = document.getElementsByTagName('input')[1].value;
+
 
     $.ajax({
         url: '/getDance/',

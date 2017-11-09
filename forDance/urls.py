@@ -20,6 +20,7 @@ from freeStyle import views as dance_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
+
     url(r'^toDance/', dance_views.toDance),
     url(r'^getDance/', dance_views.getDance),
     url(r'^success/', dance_views.successPage),

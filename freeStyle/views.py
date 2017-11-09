@@ -11,6 +11,8 @@ from models import danceRecord as dr
 
 def toDance(request):
 
+    print 'Enter toDance ....'
+
     if(request.method == "GET"):
         return render(request, "index.html")
 
@@ -39,6 +41,8 @@ def toDance(request):
 
 def getDance(request):
 
+    print 'Enter getDance ...'
+
     if(request.method == 'GET'):
         return render(request, "getDance.html")
 
@@ -53,6 +57,8 @@ def getDance(request):
         pair = {}
 
         res = dr.objects.filter(day=day, place=place).values()
+
+        print res
 
         if(res):
             for item in res:

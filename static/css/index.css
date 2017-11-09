@@ -6,7 +6,7 @@
 
 body {
     font: 6vw/1.5 tahoma,arial,sans-serif;
-    background-color: #f1f1f1;
+    background-color: #f4f4f4;
 
 }
 
@@ -87,4 +87,8 @@ table {
     border-radius: 3vw;
     text-align: center;
     box-shadow: 1px 1px 1px 1px grey;
+}
+
+.info {
+    display: none;
 }

@@ -39,7 +39,30 @@
 
         <input type="button" value="OK" onclick="submitDance()"/>
 
-        <a href="/getDance/">look at other people</a>
+        <a onclick="lookAt()">look at other people</a>
+    </div>
+
+    <div class="info">
+        <div class="container">
+            {% csrf_token %}
+
+            <label for="time" class="first">Time</label>
+            <input type="date" id="time" class="info_date"/>
+
+            <label for="place">Place</label>
+            <select id="place" class="info_place">
+                <option>A1</option>
+                <option>54</option>
+            </select>
+
+            <input type="button" value="瞧一哈" onclick="getDance()"/>
+        </div>
+
+        <div class="record">
+
+        </div>
+
+        <a onclick="goBack()">go back</a>
     </div>
 
 </body>
