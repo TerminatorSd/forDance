@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>路由器型号识别</title>
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  user-scalable=0" name="viewport" />
+    {% load staticfiles %}
+    <script src="{% static "js/vendor/jquery-1.12.0.min.js" %}"></script>
+
+    <link rel="stylesheet"  href="{%  static 'css/router.css' %}" />
+</head>
+<body>
+
+<form method="POST" action="/routerClass" enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    {% if index %}
+        <h3>该路由器型号为：{{ index }}</h3>
+    {% endif %}
+
+    <p>四款产品，从左到右型号依次为1，2，3，4</p>
+    <img src="../../static/img/router/1.jpg">
+    <img src="../../static/img/router/2.jpg">
+    <img src="../../static/img/router/3.jpg">
+    <img src="../../static/img/router/4.jpg">
+
+    <br>
+    <br>
+
+    <input type="file" name="img" value="choose file">
+
+    <br>
+    <br>
+
+    <input type="submit" value="查询">
+
+
+
+</form>
+
+
+</body>
+</html>

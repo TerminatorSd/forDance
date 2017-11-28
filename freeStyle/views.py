@@ -10,6 +10,8 @@ from pandas import json
 from models import danceRecord as dr
 from models import storeImg as si
 from PIL import Image
+import os
+import SqueezeHeader as sh
 
 
 def toDance(request):
@@ -110,3 +112,45 @@ def showImg(request):
         print i.img.url
 
     return render(request, 'showing.html', content)
+
+
+
+def routerClass(request):
+
+    if request.method == 'GET':
+        return render(request, 'router.html', {'index': 0})
+
+    if request.method == 'POST':
+
+        img = request.FILES.get('img')
+
+        dir = '/home/siudong/myGit/forDance/media/img'
+
+        # 检查服务器端是否已经有同名图片
+        res = si.objects.filter(name=img.name)
+        image_path = os.path.join(dir, str(img))
+
+        if res:
+            print 'already exists(delete it)'
+            res.delete()
+            os.remove(image_path)
+        else:
+            print 'new img'
+
+        # 保存新图片并插入数据库
+        new_img = si(
+            img=img,
+            name=img.name
+        )
+        new_img.save()
+
+        # 使用squeezenet判断图片中的路由器的型号
+        prob = sh.get_prob_of_target(image_path)
+
+        print image_path
+
+        index = prob.index(max(prob)) + 1
+
+        print index
+
+        return render(request, 'router.html', {'index': index})
