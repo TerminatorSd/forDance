@@ -16,15 +16,19 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from freeStyle import views as dance_views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
-
+    url(r'^$', dance_views.toDance),
     url(r'^toDance/', dance_views.toDance),
     url(r'^getDance/', dance_views.getDance),
     url(r'^success/', dance_views.successPage),
     url(r'^record/', dance_views.recordPage),
-    url(r'^team/', dance_views.showTeam),
+    url(r'^upload/', dance_views.uploadImg),
 
-]
+    url(r'^upload', dance_views.uploadImg),
+    url(r'^show', dance_views.showImg),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,11 +2,14 @@
 from __future__ import unicode_literals
 
 from django.http import HttpResponse
+
 from django.shortcuts import render
 
 # Create your views here.
 from pandas import json
 from models import danceRecord as dr
+from models import storeImg as si
+from PIL import Image
 
 
 def toDance(request):
@@ -78,3 +81,32 @@ def recordPage(request):
 def showTeam(request):
 
     return render(request, "team.html")
+
+def uploadImg(request):
+
+    print 'uploadImg'
+    return render(request, "success.html")
+
+def uploadImg(request):
+
+    if request.method == 'POST':
+        new_img = si(
+            img=request.FILES.get('img'),
+            name = request.FILES.get('img').name
+        )
+        new_img.save()
+
+    # img = Image.open('/home/siudong/myGit/forDance/media/img/timg.jpeg')
+    # img.show()
+    return render(request, 'uploading.html')
+
+def showImg(request):
+    imgs = si.objects.all()
+    content = {
+        'imgs':imgs,
+    }
+    for i in imgs:
+        # i.img.url = '/home/siudong/myGit/forDance' + i.img.url
+        print i.img.url
+
+    return render(request, 'showing.html', content)
