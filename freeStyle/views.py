@@ -123,12 +123,14 @@ def routerClass(request):
     if request.method == 'POST':
 
         img = request.FILES.get('img')
+	
+	# img = encode(img, 'utf-8')
+	# img.name = encode(img.name, 'utf-8')
+        dir = '/var/www/html/forDance/media/img'
 
-        dir = '/home/siudong/myGit/forDance/media/img'
-
-        # 检查服务器端是否已经有同名图片
+        # find if the image exists
         res = si.objects.filter(name=img.name)
-        image_path = os.path.join(dir, str(img))
+        image_path = os.path.join(dir, img.name)
 
         if res:
             print 'already exists(delete it)'
@@ -137,19 +139,24 @@ def routerClass(request):
         else:
             print 'new img'
 
-        # 保存新图片并插入数据库
+        # save image
         new_img = si(
             img=img,
             name=img.name
         )
         new_img.save()
 
-        # 使用squeezenet判断图片中的路由器的型号
+        # use squeezenet to do classification
         prob = sh.get_prob_of_target(image_path)
+	
+	two_list = []
+	two_list.append(prob[1])
+	two_list.append(prob[3])
+        # print image_path
+	
+	print two_list
 
-        print image_path
-
-        index = prob.index(max(prob)) + 1
+        index = two_list.index(max(two_list)) + 1
 
         print index
 

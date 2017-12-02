@@ -13,9 +13,9 @@ import caffe
 os.chdir(caffe_root)
 
 # 设置当前目录
-net_file = caffe_root + 'src/model/squeezenet_deploy.prototxt'
-caffe_model = caffe_root + 'src/model/squeezenet0.99.caffemodel'
-mean_file = caffe_root + 'src/model/mean.npy'
+net_file = caffe_root + '/src/model/squeezenet_deploy.prototxt'
+caffe_model = caffe_root + '/src/model/squeezenet0.99.caffemodel'
+mean_file = caffe_root + '/src/model/mean.npy'
 
 net = caffe.Net(net_file, caffe.TEST, weights=caffe_model)
 
