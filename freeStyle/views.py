@@ -126,9 +126,11 @@ def routerClass(request):
 
         dir = '/home/siudong/myGit/forDance/media/img'
 
+        img_name = str(img).decode(encoding='UTF-8')
+
         # 检查服务器端是否已经有同名图片
         res = si.objects.filter(name=img.name)
-        image_path = os.path.join(dir, str(img))
+        image_path = os.path.join(dir, img.name)
 
         if res:
             print 'already exists(delete it)'
