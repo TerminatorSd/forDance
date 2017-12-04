@@ -12,7 +12,7 @@ from models import danceRecord as dr
 from models import storeImg as si
 from PIL import Image
 import os
-# import SqueezeHeader as sh
+import SqueezeHeader as sh
 import AlxHeader as ah
 
 
@@ -179,7 +179,7 @@ def routerAlex(request):
         image_path = os.path.join(dir, img.name)
 
         if res:
-            print 'already exists(delete it)'
+            print 'alex already exists(delete it)'
             res.delete()
             os.remove(image_path)
         else:
