@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.http import HttpResponse
 
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 from pandas import json
@@ -114,7 +115,7 @@ def showImg(request):
     return render(request, 'showing.html', content)
 
 
-
+@csrf_exempt
 def routerClass(request):
 
     if request.method == 'GET':
