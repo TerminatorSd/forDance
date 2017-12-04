@@ -12,7 +12,7 @@ from models import danceRecord as dr
 from models import storeImg as si
 from PIL import Image
 import os
-import SqueezeHeader as sh
+# import SqueezeHeader as sh
 import AlxHeader as ah
 
 
