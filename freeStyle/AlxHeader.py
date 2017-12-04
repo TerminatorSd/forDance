@@ -7,14 +7,16 @@ import os
 # import pickle
 
 caffe_root = '/home/siudong/Deep_Learning/caffe/'
-# caffe_root = '/root/Deep_Learning/caffe'
+caffe_root = '/root/Deep_Learning/caffe'
+# caffe_root = '/home/xsd/Deep_Learning/caffe/'
+
 sys.path.insert(0, caffe_root + 'python')
 import caffe
 os.chdir(caffe_root)
 
 # 设置当前目录
-net_file = caffe_root + '/src/model/squeezenet_deploy.prototxt'
-caffe_model = caffe_root + '/src/model/squeezenet0.99.caffemodel'
+net_file = caffe_root + '/src/model/AlxNet/alxnet_deploy.prototxt'
+caffe_model = caffe_root + '/src/model/AlxNet/alexNet_0.98.caffemodel'
 mean_file = caffe_root + '/src/model/mean.npy'
 
 net = caffe.Net(net_file, caffe.TEST, weights=caffe_model)
@@ -25,24 +27,6 @@ transformer.set_mean('data', np.load(mean_file).mean(1).mean(1))
 transformer.set_raw_scale('data', 255)
 transformer.set_channel_swap('data', (2, 1, 0))
 
-
-# def load_model():
-#     # 设置当前目录
-#     net_file = '/home/cellcom/ImageRetrival_v1/Binary Hash Code/model/squeezenet_v1.1/squeezenet_v1.1.prototxt'
-#     caffe_model = '/home/cellcom/ImageRetrival_v1/Binary Hash Code/model/squeezenet_v1.1/squeezenet_v1.1.caffemodel'
-#     mean_file = caffe_root + 'python/caffe/imagenet/ilsvrc_2012_mean.npy'
-#
-#     net = caffe.Net(net_file, caffe.TEST, weights=caffe_model)
-#
-#     transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
-#     transformer.set_transpose('data', (2, 0, 1))
-#     transformer.set_mean('data', np.load(mean_file).mean(1).mean(1))
-#     transformer.set_raw_scale('data', 255)
-#     transformer.set_channel_swap('data', (2, 1, 0))
-#
-#     return net, transformer
-
-
 # 计算欧式距离，输入为两个一千维的列表
 def getEuc(imgFeature1, imgFeature2):
     dis = 0
@@ -52,14 +36,12 @@ def getEuc(imgFeature1, imgFeature2):
     dis = np.sqrt(dis)
     return dis
 
-
 # 写文件，将一个列表中的数据写入到目标文件
 def writeFile(feature_list, feature_file):
     # 将1000维浮点型特征数据保存到文件中
     with open(feature_file, 'w') as write_file:
         for i in xrange(len(feature_list)):
             write_file.write(str(feature_list[i]) + '\n')
-
 
 # 读文件，将一个文件中的内容读入一个列表, 返回一个浮点型特征列表
 def readFile(feature_file):
@@ -69,7 +51,6 @@ def readFile(feature_file):
         for i in xrange(len(code_all)):
             feature.append(float(code_all[i].strip('\n')))
     return feature
-
 
 def write_pair(pair, pair_path):
     print pair
@@ -89,7 +70,6 @@ def write_pair(pair, pair_path):
 
     print 'complete writing pair file!'
 
-
 def read_from_pair(pair_path):
     pair = {}
     pair_read = open(pair_path, 'r')
@@ -100,7 +80,6 @@ def read_from_pair(pair_path):
     finally:
         pair_read.close()
     return pair
-
 
 # extract feature of images in a certain folder and write them to the files
 def extract_feature(base_dir, feature_path):
@@ -160,7 +139,6 @@ def extract_feature(base_dir, feature_path):
         # print to_path
 
     return pair
-
 
 def extract_feature_of_target(image):
     im = caffe.io.load_image(image)

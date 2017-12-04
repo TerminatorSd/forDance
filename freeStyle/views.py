@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.http import HttpResponse
 
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 from pandas import json
@@ -11,7 +12,9 @@ from models import danceRecord as dr
 from models import storeImg as si
 from PIL import Image
 import os
+import AlxHeader as ah
 import SqueezeHeader as sh
+
 
 
 def toDance(request):
@@ -114,7 +117,7 @@ def showImg(request):
     return render(request, 'showing.html', content)
 
 
-
+@csrf_exempt
 def routerClass(request):
 
     if request.method == 'GET':
@@ -124,11 +127,10 @@ def routerClass(request):
 
         img = request.FILES.get('img')
 
-        dir = '/home/siudong/myGit/forDance/media/img'
-
-        img_name = str(img).decode(encoding='UTF-8')
+        dir = '/var/www/html/forDance/media/img'
 
         # 检查服务器端是否已经有同名图片
+
         res = si.objects.filter(name=img.name)
         image_path = os.path.join(dir, img.name)
 
@@ -139,17 +141,61 @@ def routerClass(request):
         else:
             print 'new img'
 
-        # 保存新图片并插入数据库
+        # save image
         new_img = si(
             img=img,
             name=img.name
         )
         new_img.save()
 
-        # 使用squeezenet判断图片中的路由器的型号
+        # use squeezenet to do classification
         prob = sh.get_prob_of_target(image_path)
 
-        print image_path
+        two_list = []
+        two_list.append(prob[1])
+        two_list.append(prob[3])
+        # print image_path
+	
+        print two_list
+
+        index = two_list.index(max(two_list)) + 1
+
+        print index
+
+        return render(request, 'router.html', {'index': index})
+
+
+@csrf_exempt
+def routerAlex(request):
+    if request.method == 'GET':
+        return render(request, 'router.html', {'index': 0})
+
+    if request.method == 'POST':
+
+        img = request.FILES.get('img')
+
+        dir = '/var/www/html/forDance/media/img'
+
+        # find if the image exists
+        res = si.objects.filter(name=img.name)
+        image_path = os.path.join(dir, img.name)
+
+        if res:
+            print 'alex already exists(delete it)'
+            res.delete()
+            os.remove(image_path)
+        else:
+            print 'new img'
+
+        # save image
+        new_img = si(
+            img=img,
+            name=img.name
+        )
+        new_img.save()
+
+        # use squeezenet to do classification
+        prob = ah.get_prob_of_target(image_path)
 
         index = prob.index(max(prob)) + 1
 
