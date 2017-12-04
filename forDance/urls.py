@@ -31,7 +31,7 @@ urlpatterns = [
 
     url(r'^upload', dance_views.uploadImg),
     url(r'^show', dance_views.showImg),
-    url(r'^router', dance_views.routerClass),
-    url(r'^router_alex', dance_views.routerAlex),
+    url(r'^router$', dance_views.routerAlex),
+    url(r'^router_alex$', dance_views.routerAlex)
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

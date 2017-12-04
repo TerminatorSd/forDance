@@ -13,7 +13,7 @@ from models import storeImg as si
 from PIL import Image
 import os
 import AlxHeader as ah
-import SqueezeHeader as sh
+# import SqueezeHeader as sh
 
 
 
@@ -117,55 +117,59 @@ def showImg(request):
     return render(request, 'showing.html', content)
 
 
-@csrf_exempt
-def routerClass(request):
-
-    if request.method == 'GET':
-        return render(request, 'router.html', {'index': 0})
-
-    if request.method == 'POST':
-
-        img = request.FILES.get('img')
-
-        dir = '/var/www/html/forDance/media/img'
-
-        # find if the image exists
-        res = si.objects.filter(name=img.name)
-        image_path = os.path.join(dir, img.name)
-
-        if res:
-            print 'already exists(delete it)'
-            res.delete()
-            os.remove(image_path)
-        else:
-            print 'new img'
-
-        # save image
-        new_img = si(
-            img=img,
-            name=img.name
-        )
-        new_img.save()
-
-        # use squeezenet to do classification
-        prob = sh.get_prob_of_target(image_path)
-
-        two_list = []
-        two_list.append(prob[1])
-        two_list.append(prob[3])
-        # print image_path
-	
-        print two_list
-
-        index = two_list.index(max(two_list)) + 1
-
-        print index
-
-        return render(request, 'router.html', {'index': index})
+# @csrf_exempt
+# def routerClass(request):
+#
+#     print 'enter routerClass'
+#
+#     if request.method == 'GET':
+#         return render(request, 'router.html', {'index': 0})
+#
+#     if request.method == 'POST':
+#
+#         img = request.FILES.get('img')
+#
+#         dir = '/var/www/html/forDance/media/img'
+#
+#         # 检查服务器端是否已经有同名图片
+#
+#         res = si.objects.filter(name=img.name)
+#         image_path = os.path.join(dir, img.name)
+#
+#         if res:
+#             print 'already exists(delete it)'
+#             res.delete()
+#             os.remove(image_path)
+#         else:
+#             print 'new img'
+#
+#         # save image
+#         new_img = si(
+#             img=img,
+#             name=img.name
+#         )
+#         new_img.save()
+#
+#         # use squeezenet to do classification
+#         prob = sh.get_prob_of_target(image_path)
+#
+#         two_list = []
+#         two_list.append(prob[1])
+#         two_list.append(prob[3])
+#         # print image_path
+#         print two_list
+#
+#         index = two_list.index(max(two_list)) + 1
+#
+#         print index
+#
+#         return render(request, 'router.html', {'index': index})
 
 
 @csrf_exempt
 def routerAlex(request):
+
+    print 'enter router_alex'
     if request.method == 'GET':
         return render(request, 'router.html', {'index': 0})
 
@@ -173,7 +177,9 @@ def routerAlex(request):
 
         img = request.FILES.get('img')
 
-        dir = '/var/www/html/forDance/media/img'
+        # dir = '/var/www/html/forDance/media/img'
+
+        dir = '/home/siudong/myGit/forDance/media/img'
 
         # find if the image exists
         res = si.objects.filter(name=img.name)
@@ -184,7 +190,7 @@ def routerAlex(request):
             res.delete()
             os.remove(image_path)
         else:
-            print 'new img'
+            print 'alex new img'
 
         # save image
         new_img = si(
