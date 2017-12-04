@@ -6,17 +6,17 @@ import sys
 import os
 # import pickle
 
-caffe_root = '/home/siudong/Deep_Learning/caffe/'
+# caffe_root = '/home/siudong/Deep_Learning/caffe'
 caffe_root = '/root/Deep_Learning/caffe'
 # caffe_root = '/home/xsd/Deep_Learning/caffe/'
 
-sys.path.insert(0, caffe_root + 'python')
+sys.path.insert(0, caffe_root + '/python')
 import caffe
 os.chdir(caffe_root)
 
 # 设置当前目录
-net_file = caffe_root + '/src/model/AlxNet/alxnet_deploy.prototxt'
-caffe_model = caffe_root + '/src/model/AlxNet/alexNet_0.98.caffemodel'
+net_file = caffe_root + '/src/model/AlexNet/alxnet_deploy.prototxt'
+caffe_model = caffe_root + '/src/model/AlexNet/alexNet_0.98.caffemodel'
 mean_file = caffe_root + '/src/model/mean.npy'
 
 net = caffe.Net(net_file, caffe.TEST, weights=caffe_model)
