@@ -177,9 +177,9 @@ def routerAlex(request):
 
         img = request.FILES.get('img')
 
-        # dir = '/var/www/html/forDance/media/img'
+        dir = '/var/www/html/forDance/media/img'
 
-        dir = '/home/siudong/myGit/forDance/media/img'
+        # dir = '/home/siudong/myGit/forDance/media/img'
 
         # find if the image exists
         res = si.objects.filter(name=img.name)
